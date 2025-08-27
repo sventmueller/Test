@@ -1,6 +1,24 @@
 "use client";
 import { useMemo, useState } from "react";
-import { Brain, LineChart, Wrench, Shield, Rocket, CheckCircle2, Factory, Building2, ShoppingCart, Warehouse, Cog, ArrowRight, Menu, Mail, Phone, Calendar } from "lucide-react";
+import Image from "next/image";
+import {
+  Brain,
+  LineChart,
+  Wrench,
+  Shield,
+  Rocket,
+  CheckCircle2,
+  Factory,
+  Building2,
+  ShoppingCart,
+  Warehouse,
+  Cog,
+  ArrowRight,
+  Menu,
+  Mail,
+  Phone,
+  Calendar,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -133,47 +151,19 @@ function Hero() {
               </a>
             </div>
           </div>
-          <HeroCard />
+          <div className="relative h-64 w-full md:h-96">
+            <Image
+              src="/hero.svg"
+              alt="Abstrakte Illustration"
+              fill
+              priority
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover rounded-xl shadow-2xl"
+            />
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function HeroCard() {
-  return (
-    <Card className="bg-neutral-900/60 border-white/10">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-neutral-100">
-          <Brain className="h-6 w-6 text-indigo-400" /> KI‑Potenziale im Betrieb
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-          {[
-            { icon: Building2, label: "Backoffice", hint: "E‑Mails, Doku, Angebote" },
-            { icon: ShoppingCart, label: "Vertrieb", hint: "Leads, Proposals" },
-            { icon: Factory, label: "Produktion", hint: "Qualität, Wartung" },
-            { icon: Warehouse, label: "Logistik", hint: "Planung, Routen" },
-            { icon: Cog, label: "Service", hint: "Tickets, Self‑Service" },
-            { icon: Shield, label: "Compliance", hint: "Richtlinien, DSGVO" },
-          ].map(({ icon: Icon, label, hint }) => (
-            <div key={label} className="rounded-xl border border-white/10 bg-white/5 p-3">
-              <div className="flex items-center gap-2">
-                <Icon className="h-5 w-5 text-sky-400" />
-                <div className="font-medium text-neutral-100">{label}</div>
-              </div>
-              <div className="text-xs text-neutral-400">{hint}</div>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-sky-500/10 to-emerald-500/10 p-4">
-          <div className="flex items-center gap-2 text-neutral-200"><LineChart className="h-5 w-5" />
-            <span>Typischer Effekt: 20‑50% Zeitersparnis pro Use Case in 6–10 Wochen</span>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
   );
 }
 
@@ -205,15 +195,40 @@ function Section({ id, title, kicker, children }: { id: string; title: string; k
 
 function Services() {
   const items = [
-    { icon: Wrench, title: "KI‑Quickcheck", text: "Wir identifizieren in Workshops (½–1 Tag) 5–10 sinnvolle Use Cases und priorisieren nach Aufwand/Nutzen.", highlights: ["Reifegrad‑Check", "Daten‑Reality‑Check", "Roadmap"] },
-    { icon: Rocket, title: "Pilot & Prototyping", text: "Proof‑of‑Concept in 4–6 Wochen: ein konkreter Prozess automatisiert – inkl. Messung und Schulung.", highlights: ["Schnellstart", "Change‑Begleitung", "Dokumentation"] },
-    { icon: Shield, title: "Governance & Compliance", text: "Richtlinien, Rollen, DSGVO, Betriebsrat – praxisnah umsetzen, ohne Innovation auszubremsen.", highlights: ["Policy‑Kit", "Freigaben", "Audit‑Trail"] },
-    { icon: Brain, title: "Rollout & Enablement", text: "Vom Pilot zur Breite: Schulungen, Vorlagen, Templates – damit Teams eigenständig KI einsetzen.", highlights: ["Academy", "Do‑it‑yourself‑Guides", "Support"] },
+    {
+      icon: Wrench,
+      title: "KI‑Quickcheck",
+      img: "/service-quickcheck.svg",
+      text: "Wir identifizieren in Workshops (½–1 Tag) 5–10 sinnvolle Use Cases und priorisieren nach Aufwand/Nutzen.",
+      highlights: ["Reifegrad‑Check", "Daten‑Reality‑Check", "Roadmap"],
+    },
+    {
+      icon: Rocket,
+      title: "Pilot & Prototyping",
+      img: "/service-prototype.svg",
+      text: "Proof‑of‑Concept in 4–6 Wochen: ein konkreter Prozess automatisiert – inkl. Messung und Schulung.",
+      highlights: ["Schnellstart", "Change‑Begleitung", "Dokumentation"],
+    },
+    {
+      icon: Shield,
+      title: "Governance & Compliance",
+      img: "/service-compliance.svg",
+      text: "Richtlinien, Rollen, DSGVO, Betriebsrat – praxisnah umsetzen, ohne Innovation auszubremsen.",
+      highlights: ["Policy‑Kit", "Freigaben", "Audit‑Trail"],
+    },
+    {
+      icon: Brain,
+      title: "Rollout & Enablement",
+      img: "/service-rollout.svg",
+      text: "Vom Pilot zur Breite: Schulungen, Vorlagen, Templates – damit Teams eigenständig KI einsetzen.",
+      highlights: ["Academy", "Do‑it‑yourself‑Guides", "Support"],
+    },
   ];
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {items.map(({ icon: Icon, title, text, highlights }) => (
-        <Card key={title} className="bg-neutral-900/60 border-white/10">
+      {items.map(({ icon: Icon, title, text, highlights, img }) => (
+        <Card key={title} className="overflow-hidden bg-neutral-900/60 border-white/10">
+          <img src={img} alt="" className="h-32 w-full object-cover" />
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-neutral-100">
               <Icon className="h-5 w-5 text-sky-400" /> {title}
